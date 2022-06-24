@@ -1,11 +1,23 @@
 import React from 'react';
-import { View } from 'react-native';
-import SayMyName from 'use-sizes';
+import { Text, View } from 'react-native';
+import { useReactNativeSizes, SizesProvider } from 'use-sizes';
 
-export default function App() {
+const AppContainer = () => {
+  const sizes = useReactNativeSizes();
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <SayMyName name="John" />
+      <Text>{JSON.stringify(sizes, null, 2)}</Text>
     </View>
   );
-}
+};
+
+const App = () => {
+  return (
+    <SizesProvider>
+      <AppContainer />
+    </SizesProvider>
+  );
+};
+
+export default App;
