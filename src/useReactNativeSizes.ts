@@ -42,7 +42,6 @@ const useReactNativeSizes = () => {
   useEffect(() => {
     context.setState(getSizes(dimensions));
   }, [dimensions]);
-  console.log(getSizes({ ...dimensions, width: 540, height: 960 }));
 
   return context.state || getSizes();
 };
