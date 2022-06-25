@@ -22,13 +22,13 @@ export type SizeProps = {
 };
 
 export interface Props {
-  state: {};
-  setState: (state: {}) => void;
+  state: SizeProps;
+  setState: (state: SizeProps) => void;
 }
 
 const SizesContext = createContext<Props | undefined>(undefined);
 const SizesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState<SizeProps>();
 
   return (
     <SizesContext.Provider
