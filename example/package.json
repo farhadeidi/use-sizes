@@ -1,28 +1,27 @@
 {
-  "name": "example",
+  "name": "use-sizes-example",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "build:web": "expo export --platform web"
   },
   "dependencies": {
-    "expo": "~45.0.0",
-    "expo-screen-orientation": "~4.2.0",
-    "expo-status-bar": "~1.3.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-native": "0.68.2",
-    "react-native-web": "0.17.7"
+    "@expo/metro-runtime": "~57.0.15",
+    "expo": "~57.0.20",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-web": "~0.21.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@types/react": "~17.0.21",
-    "@types/react-native": "~0.66.13",
-    "typescript": "~4.3.5"
-  },
-  "private": true
+    "@types/react": "~19.2.2",
+    "react-native-monorepo-config": "^0.4.0",
+    "typescript": "~6.0.3"
+  }
 }

@@ -1,47 +1,18 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useMemo, type ReactNode } from 'react';
+import { useWindowDimensions } from 'react-native';
+import { getSizes, type SizeProps } from './getSizes';
 
-export type SizeProps = {
-  width: number;
-  height: number;
-  scale: number;
-  fontScale: number;
-  isPhone: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
-  isLandscapeMode: boolean;
-  isPortraitMode: boolean;
-  aspectRatio: number[];
-  is?: {
-    xs: boolean;
-    s: boolean;
-    m: boolean;
-    l: boolean;
-    xl: boolean;
-    xxl: boolean;
-  };
-};
+export const SizesContext = createContext<SizeProps | undefined>(undefined);
 
-export interface Props {
-  state: SizeProps;
-  setState: (state: SizeProps) => void;
-}
+export function SizesProvider({ children }: { children: ReactNode }) {
+  const { width, height, scale, fontScale } = useWindowDimensions();
 
-const SizesContext = createContext<Props | undefined>(undefined);
-const SizesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useState<SizeProps>();
+  const sizes = useMemo(
+    () => getSizes({ width, height, scale, fontScale }),
+    [width, height, scale, fontScale]
+  );
 
   return (
-    <SizesContext.Provider
-      value={
-        {
-          state,
-          setState,
-        } as Props
-      }
-    >
-      {children}
-    </SizesContext.Provider>
+    <SizesContext.Provider value={sizes}>{children}</SizesContext.Provider>
   );
-};
-
-export { SizesProvider, SizesContext };
+}

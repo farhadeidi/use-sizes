@@ -1,43 +1,46 @@
 # use-sizes
 
-A simple and minimal device size checker hook for react-native
+A simple and minimal device size checker hook for React Native and Expo (iOS, Android and Web).
+
+- Built on `useWindowDimensions`, so it updates on rotation, split-screen and browser resize.
+- Sizes are computed once per dimension change and shared through context, so every consumer gets the same object.
+- Works with React 19, React Native 0.8x and Expo SDK 57. Ships as ESM with TypeScript definitions.
 
 ## Installation
-
-```sh
-yarn add use-sizes
-```
-
-or
 
 ```sh
 npm install use-sizes
 ```
 
-## Usage with React-Native
+or
 
-1. Wrap your app entry point in SizesProvider
+```sh
+yarn add use-sizes
+```
+
+## Usage
+
+1. Wrap your app entry point in `SizesProvider`
 
 ```tsx
 import { SizesProvider } from 'use-sizes';
 
-const App = () => {
+export default function App() {
   return (
     <SizesProvider>
       <AppContainer />
     </SizesProvider>
   );
-};
-
-export default App;
+}
 ```
 
-2. Use hook to access sizes
+2. Use the hook anywhere below the provider
 
 ```tsx
+import { Text, View } from 'react-native';
 import { useReactNativeSizes } from 'use-sizes';
 
-const AppContainer = () => {
+function AppContainer() {
   const sizes = useReactNativeSizes();
 
   return (
@@ -45,12 +48,12 @@ const AppContainer = () => {
       <Text>{JSON.stringify(sizes, null, 2)}</Text>
     </View>
   );
-};
+}
 ```
 
 ## Result
 
-```tsx
+```ts
 const sizes = {
   width: 540, // number
   height: 960, // number
@@ -72,6 +75,21 @@ const sizes = {
   },
 };
 ```
+
+## Helpers
+
+The pure functions behind the hook are exported as well, so you can use them outside of React:
+
+```ts
+import { Dimensions } from 'react-native';
+import { getSizes, getAspectRatio, getGreatestCommonDivisor } from 'use-sizes';
+
+const sizes = getSizes(Dimensions.get('window'));
+getAspectRatio(1920, 1080); // [16, 9]
+getGreatestCommonDivisor(1920, 1080); // 120
+```
+
+Types `SizeProps` and `SizeInput` are exported too.
 
 ## Contributing
 
