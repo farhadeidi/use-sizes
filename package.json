@@ -1,6 +1,6 @@
 {
   "name": "use-sizes",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "A simple and minimal device size checker hook for React Native",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
